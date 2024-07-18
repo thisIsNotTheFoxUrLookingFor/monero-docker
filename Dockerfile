@@ -1,0 +1,16 @@
+FROM debian:bookworm-slim AS build
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -yq \
+  && apt-get -yq install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3 libevent-dev libboost-all-dev libsqlite3-dev net-tools \
+  git dnsutils htop wget curl libminiupnpc-dev libnatpmp-dev libzmq3-dev systemtap-sdt-dev libssl-dev cmake pkg-config libpgm-dev libnorm-dev libunbound-dev libsodium-dev \
+  libunwind8-dev liblzma-dev libreadline6-dev libexpat1-dev libgtest-dev ccache doxygen graphviz qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev libprotobuf-dev protobuf-compiler libudev-dev\
+  && cd /usr/src/gtest && cmake . && make && cd /usr/src/gtest && cmake . && mv lib/libg* /usr/lib/ && cd ~ && git clone https://github.com/tortxoFFoxtrot/monero.git \
+  && cd monero && git checkout v0.18.3.3 && git submodule init && git submodule update && make -j 8 && cp ~/monero/build/Linux/_HEAD_detached_at_v0.18.3.3_/release/bin/* /usr/bin
+
+WORKDIR /scripts
+
+COPY scripts /scripts
+
+RUN chmod 555 /scripts/start.sh
+
+CMD /scripts/start.sh

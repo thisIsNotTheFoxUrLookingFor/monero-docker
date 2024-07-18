@@ -1,0 +1,12 @@
+services:
+  monerod:
+    container_name: monerod
+    image: monerod:latest
+    build:
+      context: .
+      network: host
+      dockerfile: ./Dockerfile
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./config:/config:ro
