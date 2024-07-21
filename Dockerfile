@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -yq \
   libunwind8-dev liblzma-dev libreadline6-dev libexpat1-dev libgtest-dev ccache doxygen graphviz qttools5-dev-tools libhidapi-dev libusb-1.0-0-dev psmisc \
   libprotobuf-dev protobuf-compiler libudev-dev && cd /usr/src/gtest && cmake . && make && cd /usr/src/gtest && cmake . && mv lib/libg* /usr/lib/ && cd ~ \
   && git clone https://github.com/monero-project/monero.git && cd monero && git checkout v0.18.3.3 && git submodule init && git submodule update && make -j 8 \
-  && cp ~/monero/build/Linux/_HEAD_detached_at_v0.18.3.3_/rele~/moneroase/bin/* /usr/bin && rm -rf ~/monero
+  && cp ~/monero/build/Linux/_HEAD_detached_at_v0.18.3.3_/release/bin/* /usr/bin && rm -rf ~/monero
 
 WORKDIR /scripts
 
