@@ -1,14 +1,17 @@
 services:
-  monerod:
-    container_name: monerod
-    image: monerod:latest
+  monero:
+    container_name: monero
+    image: farfoxachedocker/monero:latest
     build:
       context: .
       network: host
       dockerfile: ./Dockerfile
+    user: 33:33
     network_mode: host
     restart: unless-stopped
-    stop_grace_period: 30m1s
+    stop_grace_period: 90s
     stop_signal: SIGTERM
     volumes:
       - ./config:/config:ro
+      - /mnt/raid-pool/blockchains/Monero:/monero:rw
+networks: {}
