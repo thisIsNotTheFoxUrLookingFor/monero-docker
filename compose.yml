@@ -13,5 +13,6 @@ services:
     stop_signal: SIGTERM
     volumes:
       - ./config:/config:ro
+      - ./logs:/logs:rw
       - /mnt/raid-pool/blockchains/Monero:/monero:rw
 networks: {}
