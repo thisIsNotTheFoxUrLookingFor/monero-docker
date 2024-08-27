@@ -1,5 +1,6 @@
 #!/bin/bash
-monero-gen-ssl-cert --certificate-filename=/monero/rpc_ssl.crt --private-key-filename=/monero/rpc_ssl.key
-chown www-data:www-data /monero/rpc_ssl.key
-chown www-data:www-data /monero/rpc_ssl.crt
-exec sudo -H -u www-data monerod --non-interactive --config-file=/config/monerod.conf
+apt update -yq && apt upgrade -yq
+monero-gen-ssl-cert --certificate-filename=/ssl/rpc_ssl.crt --private-key-filename=/ssl/rpc_ssl.key
+chown www-data:www-data /ssl/rpc_ssl.key
+chown www-data:www-data /ssl/rpc_ssl.crt
+exec supervisord -c /config/supervisord.conf -n
